@@ -2,7 +2,7 @@
 
 #define MAX_OBJECTS 1000
 #define MinMax 2
-#define NumColors 25
+#define COLORS 25
 
 const Color colors[] = { LIGHTGRAY, GRAY, DARKGRAY, YELLOW, GOLD, ORANGE, PINK,
 			RED, MAROON, GREEN, LIME, DARKGREEN, SKYBLUE, BLUE,
@@ -27,10 +27,10 @@ typedef struct {
 
 int init_environment(Environment* env);
 
-int add_object(); 
+int add_object(Environment* env); 
 
-int remove_object();
+int remove_object(Environment* env);
 
-void check_collision();
+void check_collision(Environment* env);
 
 
