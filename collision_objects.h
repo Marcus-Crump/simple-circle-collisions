@@ -33,4 +33,4 @@ int remove_object(Environment* env);
 
 void check_collision(Environment* env);
 
-
+void draw_environment(Environment* env);
