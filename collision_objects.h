@@ -13,6 +13,8 @@ typedef struct {
 	float radius;
 	int x, y, velx, vely;
 	Color color;
+	// for later implementation
+	// float mass;
 
 } Object;
 
@@ -25,6 +27,8 @@ typedef struct {
 } Environment;
 
 int init_environment(Environment* env);
+
+void set_environment_boundaries(Environment* env);
 
 int add_object(Environment* env); 
 
