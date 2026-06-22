@@ -11,8 +11,7 @@ const Color colors[] = { LIGHTGRAY, GRAY, DARKGRAY, YELLOW, GOLD, ORANGE, PINK,
 
 typedef struct {
 	float radius;
-	int x, y;
-	double float velx, vely;
+	int x, y, velx, vely;
 	Color color;
 
 } Object;
