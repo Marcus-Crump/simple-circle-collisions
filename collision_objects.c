@@ -1,6 +1,7 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include <time.h>
-#include "collisions_objects.h"
+#include "collision_objects.h"
 #include "raylib.h"
 
 #define MAX_RADIUS 20
@@ -12,10 +13,13 @@ int init_environment(Environment* env){
 	env->obj_num = 0;
 	env->x[0] = 0;
 	env->y[0] = 0;
+	set_environment_boundaries(env);
+	return 0;
+}
+
+void set_environment_boundaries(Environment* env) {
 	env->x[1] = GetScreenWidth();
 	env->y[1] = GetScreenHeight();
-
-	return 0;
 }
 
 int add_object(Environment* env) {
@@ -25,7 +29,7 @@ int add_object(Environment* env) {
 	
 	env->obj_num++;
 
-	Object* obj = &env->objects[obj_num-1];
+	Object* obj = &env->objects[env->obj_num-1];
 
 	obj->radius = rand()%MAX_RADIUS;
 	obj->color = colors[rand()%COLORS];
@@ -35,6 +39,7 @@ int add_object(Environment* env) {
 	obj->vely = rand()%5;
 
 	return 0;
+}
 
 int remove_object(Environment* env) {
 	if (env->obj_num == 0) { return 1; }
@@ -42,7 +47,7 @@ int remove_object(Environment* env) {
 	env->obj_num--;
 
 	return 0;
-
+}
 
 // TODO: - collision detection
 // 	 - velocity update
@@ -51,7 +56,21 @@ void check_collision(Environment* env) {
 	
 	for ( int i = 0; i < env->obj_num; i++) {
 		Object* one = &env->objects[i];
-		for (int j = i+1; j < env->obj; j++) {
+		
+		if ((one->x + one->radius) > env->x[1]) {
+			one->x = env->x[1] - one->radius;
+		} else if ((one->x - one->radius) < env->x[0]) {
+			one->x = env->x[0] + one->radius;
+		}
+
+
+		if ((one->y + one->radius) > env->y[1]) {
+			one->y= env->y[1] - one->radius;
+		} else if ((one->y - one->radius) < env->y[0]) {
+			one->y = env->y[0] + one->radius;
+		}
+
+		for (int j = i+1; j < env->obj_num; j++) {
 			Object* two = &env->objects[j];
 
 			int dtotalsq = ((two->x - one->x)*(two->x - one->x));
