@@ -53,6 +53,16 @@ int remove_object(Environment* env) {
 	return 0;
 }
 
+void update_object_positions(Environment* env) {
+
+	for (int i = 0; i < env->obj_num; i++) {
+		Object* cur = &env->objects[i];
+		cur->x += cur->velx;
+		cur->y += cur->vely;
+	}
+
+}
+
 // TODO: - collision detection
 // 	 - velocity update
 // 	 - position update
