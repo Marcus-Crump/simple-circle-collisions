@@ -1,20 +1,24 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include <time.h>
 #include "collision_objects.h"
 #include "raylib.h"
 
 #define MAX_RADIUS 20
 
-int init_environment(Environment* env){
-	env = malloc(sizeof(Environment));
-	if (!env) { return 1; }
+const Color los_colores[] = { LIGHTGRAY, GRAY, DARKGRAY, YELLOW, GOLD, ORANGE, PINK,
+			RED, MAROON, GREEN, LIME, DARKGREEN, SKYBLUE, BLUE,
+			DARKBLUE, PURPLE, VIOLET, DARKPURPLE, BEIGE, BROWN,
+			DARKBROWN, WHITE, BLACK, MAGENTA, RAYWHITE };
+
+Environment* init_environment(){
+	Environment* env = malloc(sizeof(Environment));
+	if (!env) { return NULL; }
 
 	env->obj_num = 0;
 	env->x[0] = 0;
 	env->y[0] = 0;
 	set_environment_boundaries(env);
-	return 0;
+	return env;
 }
 
 void set_environment_boundaries(Environment* env) {
@@ -31,8 +35,8 @@ int add_object(Environment* env) {
 
 	Object* obj = &env->objects[env->obj_num-1];
 
-	obj->radius = rand()%MAX_RADIUS;
-	obj->color = colors[rand()%COLORS];
+	while (!(obj->radius = rand()%MAX_RADIUS)) {}
+	obj->color = los_colores[rand()%COLORS];
 	obj->x = rand()%env->x[1];
 	obj->y = rand()%env->y[1];
 	obj->velx = rand()%5;
@@ -84,7 +88,6 @@ void check_collision(Environment* env) {
 				// OBJECTS MOVING IN THE SAME DIRECTION
 				// Collision occured
 				// Set the velocity of either object to go in opposite x*=-1 y*=-1
-				printf("BANG\n");
 
 				// variables to store the inital velocity of obj one
 				int one_vx = one->velx;
