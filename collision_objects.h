@@ -4,11 +4,6 @@
 #define MinMax 2
 #define COLORS 25
 
-const Color colors[] = { LIGHTGRAY, GRAY, DARKGRAY, YELLOW, GOLD, ORANGE, PINK,
-			RED, MAROON, GREEN, LIME, DARKGREEN, SKYBLUE, BLUE,
-			DARKBLUE, PURPLE, VIOLET, DARKPURPLE, BEIGE, BROWN,
-			DARKBROWN, WHITE, BLACK, MAGENTA, RAYWHITE };
-
 typedef struct {
 	float radius;
 	int x, y, velx, vely;
@@ -26,13 +21,15 @@ typedef struct {
 
 } Environment;
 
-int init_environment(Environment* env);
+Environment* init_environment();
 
 void set_environment_boundaries(Environment* env);
 
 int add_object(Environment* env); 
 
 int remove_object(Environment* env);
+
+void update_object_positions(Environment* env);
 
 void check_collision(Environment* env);
 
