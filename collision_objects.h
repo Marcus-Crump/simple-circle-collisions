@@ -22,7 +22,7 @@ typedef struct {
 typedef struct {
 	Object objects[MAX_OBJECTS];
 	int obj_num;
-	float x[MinMax],y[MinMax];
+	int x[MinMax],y[MinMax];
 
 } Environment;
 
