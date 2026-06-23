@@ -31,6 +31,8 @@ int main(void)
         if (IsKeyPressed(KEY_EQUAL)) { add_object(env); }
         if (IsKeyPressed(KEY_MINUS)) { remove_object(env); }
 
+	update_object_positions(env);
+
 	check_collision(env);
 	//----------------------------------------------------------------------------------
 
@@ -42,7 +44,7 @@ int main(void)
 
 	    draw_environment(env);
 
-            DrawText("Congrats! You created your first window!", 0, 0, 20, LIGHTGRAY);
+            DrawText("Press '+' to add objects and '-' to remove them", 0, 0, 20, BLACK);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
